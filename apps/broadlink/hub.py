@@ -50,6 +50,7 @@ class s3(Device):
         pwr1: bool = None,
         pwr2: bool = None,
         pwr3: bool = None,
+        fh_tempinside: int = None, 
     ) -> dict:
         """Set the power state of the device."""
         state = {}
@@ -61,6 +62,8 @@ class s3(Device):
             state["pwr2"] = int(bool(pwr2))
         if pwr3 is not None:
             state["pwr3"] = int(bool(pwr3))
+        if fh_tempinside is not None:
+            state["fh_tempinside"] = fh_tempinside
 
         packet = self._encode(2, state)
         response = self.send_packet(0x6A, packet)
